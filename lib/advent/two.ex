@@ -1,11 +1,12 @@
 defmodule Advent.Two do
-  @goal_value 19690720
+  @goal_value 19_690_720
 
   def one do
     read_input()
     |> set_memory(1, 12)
     |> set_memory(2, 2)
     |> execute(0)
+    |> hd()
   end
 
   def two do
