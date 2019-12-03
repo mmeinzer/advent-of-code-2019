@@ -10,7 +10,28 @@ defmodule Advent.Two do
   end
 
   def two do
-    read_input()
+    params = get_input_combos(0, 99)
+    fresh_instructions = read_input()
+
+    remaining_inputs = Enum.drop_while(params, fn input_params ->
+      {param1, param2} = input_params
+      result =
+        fresh_instructions
+        |> set_memory(1, param1)
+        |> set_memory(2, param2)
+        |> execute(0)
+        |> hd()
+
+      result != @goal_value
+    end)
+
+    {noun, verb} = hd(remaining_inputs)
+    100 * noun + verb
+  end
+
+  defp get_input_combos(low, high) do
+    range = low..high
+    for a<-range, b<-range, do: {a, b}
   end
 
   defp execute(instructions, op_index) do
