@@ -28,7 +28,15 @@ defmodule Advent.Three do
     MapSet.put(points_set, point)
   end
 
-  defp get_next_point(start, delta) do
+  @doc """
+  Returns a point based on a starting point and a vector
+
+  ## Examples
+
+      iex> Advent.Three.get_next_point({4, 2}, {0, 6})
+      {4, 8}
+  """
+  def get_next_point(start, delta) do
     {x, y} = start
     {dx, dy} = delta
 
@@ -47,7 +55,15 @@ defmodule Advent.Three do
     end
   end
 
-  defp parse_instruction(instruction) do
+  @doc """
+  Parses an instruction string (ex "U42") and returns a vector tuple in the form of {x, y}. Up and right are positive numbers while left and down are negative numbers.
+
+  ## Examples
+
+      iex> Advent.Three.parse_instruction("D12")
+      {0, -12}
+  """
+  def parse_instruction(instruction) do
     {direction, distance_str} = String.split_at(instruction, 1)
     distance = String.to_integer(distance_str)
 
