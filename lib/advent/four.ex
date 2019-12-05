@@ -18,15 +18,8 @@ defmodule Advent.Four do
   end
 
   defp is_increasing(num) do
-    original = Integer.to_string(num)
-
-    sorted =
-      original
-      |> String.split("", trim: true)
-      |> Enum.sort()
-      |> Enum.join()
-
-    sorted == original
+    digits = Integer.digits(num)
+    digits == Enum.sort(digits)
   end
 
   defp has_double(num) do
