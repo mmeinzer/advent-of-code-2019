@@ -14,7 +14,7 @@ defmodule Advent.Seven do
   end
 
   def get_op(instructions, index) do
-    Enum.fetch!(instructions, index)
+    Map.get(instructions, index)
     |> standardize_op()
     |> get_op_symbol()
   end
@@ -55,10 +55,12 @@ defmodule Advent.Seven do
     end
   end
 
-  defp read_input do
+  def read_input do
     {:ok, bin} = File.read("./lib/inputs/seven.txt")
 
     String.split(bin, [",", "\n"], trim: true)
     |> Enum.map(&String.to_integer/1)
+    |> Enum.with_index()
+    |> Map.new(fn {instruction, i} -> {i, instruction} end)
   end
 end
